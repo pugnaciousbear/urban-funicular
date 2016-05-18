@@ -4,4 +4,4 @@
 clear
 echo "Welcome, $USER !"
 echo "Connecting to SSH server..."
-sshpass -p "passwordhere" ssh -o StrictHostKeyChecking=no user@host
+if $(sshpass -p "passwordhere" ssh -o StrictHostKeyChecking=no user@host); then echo "Success!"; else echo "Connection failed. Check your password and login, and/or whether the server is online."; fi
