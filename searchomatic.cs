@@ -22,9 +22,9 @@ namespace SearchOMatic
     class Program
     {
 
-        string token = "MjM5Nzk0MzA3NDkyNjEwMDQ5.Cu59ZA.qniYni2KVrisTwgIvAdGvU2K8do";
-        const string apiKey = "AIzaSyC7sZwsm6KyehHNqOQEV669AG47dfVs0Fs";
-        const string searchEngineId = "004183145178373012931:xbqgoq8nwlc";
+        string token = "Please message me or Fires if you need this";
+        const string apiKey = "Please message me or Fires if you need this";
+        const string searchEngineId = "Please message me or Fires if you need this";
         string query = null;
 
         static void Main(string[] args)
