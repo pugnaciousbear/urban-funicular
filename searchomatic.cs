@@ -77,7 +77,7 @@ namespace SearchOMatic
                     }
                     if (e.Message.IsMentioningMe())
                     {
-                        await e.Channel.SendMessage(e.User.Mention + " yo fam whats good ma brutha type !help if you gotta get some help ma brutha");
+                        await e.Channel.SendMessage(e.User.Mention + " yo fam whats good ma brutha type shelp if you gotta get some help ma brutha");
                     }
 
                 };
