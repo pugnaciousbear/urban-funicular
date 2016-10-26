@@ -69,7 +69,7 @@ namespace SearchOMatic
                     string spce = " ";
 
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($"Server: {e.Server.Name} | Channel: {e.Channel.Name} | User: {e.User} {spce}: {e.Message.Text}");
+                    Console.WriteLine($"Server: {e.Server.Name} | Channel: #{e.Channel.Name} | User: {e.User} {spce}: {e.Message.Text}");
                     Console.ResetColor();
                     if (e.Message.Channel.IsPrivate)
                     {
