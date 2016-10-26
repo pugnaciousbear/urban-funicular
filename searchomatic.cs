@@ -83,6 +83,9 @@ namespace SearchOMatic
                     {
                         Console.WriteLine("Recieved DM " + e.User.Name + e.Message.Text);
                     }
+                      Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.WriteLine("Recieved DM from " + e.User.Name + " | " + e.Message.Text);
+                    
                     if (e.Message.IsMentioningMe())
                     {
                         await e.Channel.SendMessage(e.User.Mention + " yo fam whats good ma brutha type shelp if you gotta get some help ma brutha");
@@ -184,7 +187,25 @@ namespace SearchOMatic
                                   await e.Channel.SendMessage("Error");
                               }
                           });
-
+            
+            //Broken god dammit
+            cService.CreateCommand("terminate")
+                .Description("Terminates the bot. Should be owner only :P")
+                .Parameter("user", ParameterType.Required)
+                .Do(async (e) =>
+                {
+                    if (e.GetArg("user") != null)
+                    {
+                        await e.Channel.SendMessage("Goodbye :sad:");
+                    }
+                    else
+                    {
+                        await e.Channel.SendMessage("I'm sorry " + e.User.Name, "," + "I'm afraid I can't let you do that.");
+                    }
+                }
+                );  
+//Code below here should work as no
+            
             cService.CreateCommand("invite")
                .Description("Lol its an invite")
                .Do(async (e) =>
