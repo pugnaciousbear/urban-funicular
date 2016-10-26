@@ -60,7 +60,7 @@ namespace SearchOMatic
             {
 
 
-              client.MessageReceived += async (s, e) =>
+                _client.MessageReceived += async (s, e) =>
                 {
 
                     if (e.Message.IsAuthor) return;
@@ -75,13 +75,14 @@ namespace SearchOMatic
                     }
                     else
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("DM Recieved."); //DO NOT DELETE I am unaware if this will break and error if this does not exist
+               //         Console.ForegroundColor = ConsoleColor.Red;
+               //         Console.WriteLine("DM Recieved."); //DO NOT DELETE I am unaware if this will break and error if this does not exist
                     }
                     Console.ForegroundColor = ConsoleColor.Green;
                     if (e.Message.Channel.IsPrivate)
                     {
-                        Console.WriteLine("Recieved DM " + e.User.Name + e.Message.Text);
+                         Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.WriteLine("Recieved DM from " + e.User.Name + " | " + e.Message.Text);
                     }
                     if (e.Message.IsMentioningMe())
                     {
@@ -89,7 +90,6 @@ namespace SearchOMatic
                     }
                     Console.ResetColor();
                 };
-
 
 
                 await _client.Connect(token, TokenType.Bot);
@@ -218,6 +218,23 @@ namespace SearchOMatic
                     _client.SetStatus(Discord.UserStatus.Idle);
                     await e.Channel.SendMessage("Changed to idle.");
                 });
+         //This is broken   
+               //cService.CreateCommand("terminate")
+                //.Description("Terminates the bot. Should be owner only :P")
+                //.Parameter("user", ParameterType.Required)
+                //.Do(async (e) =>
+                //{
+                    //if (e.GetArg("user") != null)
+                    //{
+                     //   await e.Channel.SendMessage("Goodbye :sad:");
+                   // }
+                   // else
+                   // {
+                    //    await e.Channel.SendMessage("I'm sorry " + e.User.Name, "," + "I'm afraid I can't let you do that.");
+                  //  }
+                //}
+                //);  
+            //There
 
             //cService.CreateCommand("sendfile")
             //    .Description("sends a file to a channel")
