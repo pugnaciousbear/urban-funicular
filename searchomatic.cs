@@ -67,10 +67,18 @@ namespace SearchOMatic
 
 
                     string spce = " ";
-
+                    
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($"Server: {e.Server.Name} | Channel: #{e.Channel.Name} | User: {e.User} {spce}: {e.Message.Text}");
-                    Console.ResetColor();
+                    if (e.Server != null) //If E.Server is NOT null, continue with message. Could probably move E.Message.Channel.IsPrivate up above this. Who cares
+                    {
+                        Console.WriteLine($"Server: {e.Server.Name} | Channel: #{e.Channel.Name} | User: {e.User} {spce}: {e.Message.Text}"); //usual write up
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("DM Recieved."); //DO NOT DELETE I am unaware if this will break and error if this does not exist
+                    }
+                    Console.ForegroundColor = ConsoleColor.Green;
                     if (e.Message.Channel.IsPrivate)
                     {
                         Console.WriteLine("Recieved DM " + e.User.Name + e.Message.Text);
@@ -79,7 +87,7 @@ namespace SearchOMatic
                     {
                         await e.Channel.SendMessage(e.User.Mention + " yo fam whats good ma brutha type shelp if you gotta get some help ma brutha");
                     }
-
+                    Console.ResetColor();
                 };
 
 
