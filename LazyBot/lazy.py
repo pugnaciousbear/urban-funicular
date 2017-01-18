@@ -1,11 +1,14 @@
 import discord
+import urllib.request
 import asyncio
 import time
-import random
 import config
+import datetime
+
+list = config.bannedwords
 admins = config.admins
-bannedwords = config.bannedwords
-def admin(message):
+
+def admins(message):
     if message.author.id in admins:
         return True
     else:
@@ -23,34 +26,24 @@ async def on_ready(): #Anything below is run when the bot logs into Discord's se
 
 @client.event
 async def on_message(message):
+        if message.content.startswith(">shutdown"):
+            if admins(message):
+                await client.send_message(message.channel, ":wave:")
+                await client.change_presence(game=discord.Game(name="Shutting down..."))
+                print("Bot shutting down....")
+                time.sleep(5)
+                await client.logout()
+                print("Bot has successfully shutdown")
 
-    if message.content.startswith(">shutdown"):
-        if admin(message):
-            await client.send_message(message.channel, ":wave:")
-            await client.change_presence(game=discord.Game(name="Shutting down..."))
-            print("Bot shutting down on request of user", message.author, ".....")
-            time.sleep(5)
-            await client.logout()
-            print("Bot has successfully shutdown.")
+            else:
+                await client.send_message(message.channel, "Error: insufficient permission")
 
-        else:
-            print("User", message.author, "tried to shut down the bot!")
-
-    if any(word in message.content for word in bannedwords):
-        await client.delete_message(message)
-        await client.kick(message.author)
-        await client.send_message(message.channel, "The user was kicked for saying a banned word.")
-        await client.send_message(message.author, "You were kicked from **LazyPurple's Discord Server** for saying a banned word.")
-        print(message.author, "was kicked for saying ", message.content)
-
-    if message.content.startswith(">servers"):
-        if admin(message):
-            servers = list(client.servers)
-            listsrv = []
-            for i in servers:
-                listsrv.append(i.name)
-                listsrv.append(i.id)
-            await client.send_message(message.author, "```[servername, serverid] \n " + str(listsrv) + "```")
+        if any(word in message.content for word in list):
+            await client.delete_message(message)
+            await client.kick(message.author)
+            await client.send_message(message.channel, "The user was kicked for saying a banned word.")
+            await client.send_message(message.author, "You were kicked from **LazyPurple's Discord Server** for saying a banned word.")
+            print(message.author, "was kicked for saying ", message.content)
 
 @client.event
 async def on_server_available(server):
@@ -66,6 +59,5 @@ async def on_server_join(server):
 
 
 
-def run():
-    client.run(token)
-run()
+
+client.run(token)
